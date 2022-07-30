@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openbox_menu xmlns="http://openbox.org/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://openbox.org/ file:///usr/share/openbox/menu.xsd">
+    <menu id="root-menu" label="Openbox 3">
+        <item label="FreeFileSync">
+            <action name="Execute">
+                <execute>/opt/freefilesync/Bin/FreeFileSync_x86_64 -Edit -DirPair /home/freefilesync/path1 /home/freefilesync/path2</execute>
+            </action>
+        </item>
+    </menu>
+</openbox_menu>
