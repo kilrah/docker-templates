@@ -26,8 +26,9 @@ RUN apt update -y && apt install -y --no-install-recommends wget ca-certificates
 FROM debian:buster
 
 RUN apt-get update -y && \
-    apt-get install -y --no-install-recommends openbox tigervnc-standalone-server supervisor gosu openssh-client libgtk2.0-bin && \
-    rm -rf /var/lib/apt/lists && \
+    apt-get install -y --no-install-recommends openbox tigervnc-standalone-server supervisor gosu openssh-client libgtk2.0-bin \
+      fonts-deva-extra fonts-arphic-ukai fonts-arphic-uming fonts-ipafont-mincho fonts-ipafont-gothic fonts-unfonts-core \
+    && rm -rf /var/lib/apt/lists && \
     apt autoclean -y && \
     apt autoremove -y \
     && useradd -u 99 -g 100 --create-home --home-dir /home/freefilesync freefilesync \
