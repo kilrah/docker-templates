@@ -6,5 +6,10 @@
                 <execute>/opt/freefilesync/Bin/FreeFileSync_x86_64 -Edit -DirPair /home/freefilesync/path1 /home/freefilesync/path2</execute>
             </action>
         </item>
+        <item label="Firefox">
+            <action name="Execute">
+                <execute>firefox</execute>
+            </action>
+        </item>
     </menu>
 </openbox_menu>

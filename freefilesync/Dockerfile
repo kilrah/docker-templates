@@ -28,6 +28,7 @@ FROM debian:buster
 RUN apt-get update -y && \
     apt-get install -y --no-install-recommends openbox tigervnc-standalone-server supervisor gosu openssh-client libgtk2.0-bin \
       fonts-deva-extra fonts-arphic-ukai fonts-arphic-uming fonts-ipafont-mincho fonts-ipafont-gothic fonts-unfonts-core \
+      firefox-esr xdg-utils \
     && rm -rf /var/lib/apt/lists && \
     apt autoclean -y && \
     apt autoremove -y \
@@ -41,6 +42,8 @@ COPY --from=easy-novnc-build /bin/easy-novnc /usr/local/bin/
 COPY --from=freefilesync-prep /opt/freefilesync /opt/freefilesync
 COPY supervisord.conf /etc/
 COPY menu.xml /etc/xdg/openbox/
+
+ENV DISPLAY=:0
 
 EXPOSE 8080
 
