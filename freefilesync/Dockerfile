@@ -10,10 +10,10 @@ RUN apt update -y && apt install -y --no-install-recommends wget ca-certificates
     && mkdir /opt/ffs_dl \
     && mkdir /opt/freefilesync \
     && cd /opt/ffs_dl \
-    && wget -q https://freefilesync.org/download/FreeFileSync_11.27_Linux.tar.gz \
-    && 7zz x FreeFileSync_11.27_Linux.tar.gz \
-    && 7zz x FreeFileSync_11.27_Linux.tar \
-    && 7zz x FreeFileSync_11.27_Install.run \
+    && wget -q https://freefilesync.org/download/FreeFileSync_11.28_Linux.tar.gz \
+    && 7zz x FreeFileSync_11.28_Linux.tar.gz \
+    && 7zz x FreeFileSync_11.28_Linux.tar \
+    && 7zz x FreeFileSync_11.28_Install.run \
     && 7zz x FreeFileSync.tar.gz \
     && mv FreeFileSync.tar /opt/freefilesync \
     && cd /opt/freefilesync \
