@@ -26,13 +26,13 @@ COPY --from=easy-novnc-build /bin/easy-novnc /usr/local/bin/
 COPY supervisord.conf /etc/
 COPY menu.xml /etc/xdg/openbox/
 
-ENV DISPLAY=:0
+ENV DISPLAY=:0 PUID=99 PGID=100
 
 EXPOSE 8080
 
 VOLUME /home/arduino/
 
-CMD ["bash", "-c", "chown -R 99:100 /dev/stdout && chmod 0666 /dev/tty* && exec gosu arduino supervisord"]
+CMD ["bash", "-c", "groupmod -o -g ${PGID} users && usermod -o -u ${PUID} arduino && chown -R ${PUID}:${PGID} /dev/stdout /home/arduino && chmod 0666 /dev/tty* && exec gosu arduino supervisord"]
 
     
     
