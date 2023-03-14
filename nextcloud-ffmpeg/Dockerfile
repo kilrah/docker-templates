@@ -1,10 +1,13 @@
 FROM nextcloud
 
-RUN apt-get update -y \
-    && apt-get install -y ffmpeg \
-    && rm -rf /var/lib/apt/lists  \
+RUN apt-get update \
+    && apt-get install -y software-properties-common \
+    && apt-add-repository -y non-free \
+    && apt-get update \
+    && apt-get install -y ffmpeg intel-media-va-driver-non-free \
     && apt autoclean -y \
-    && apt autoremove -y 
+    && apt autoremove -y \
+    && rm -rf /var/lib/apt/lists
 
 
     
