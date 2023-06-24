@@ -6,14 +6,14 @@ RUN go mod init build && \
 
 FROM ubuntu:22.04 as freefilesync-prep
 
-RUN apt update -y && apt install -y --no-install-recommends wget ca-certificates 7zip \
-    && mkdir /opt/ffs_dl \
+RUN apt update -y && apt install -y --no-install-recommends wget ca-certificates 7zip
+RUN mkdir /opt/ffs_dl \
     && mkdir /opt/freefilesync \
     && cd /opt/ffs_dl \
-    && wget -q https://freefilesync.org/download/FreeFileSync_12.2_Linux.tar.gz \
-    && 7zz x FreeFileSync_12.2_Linux.tar.gz \
-    && 7zz x FreeFileSync_12.2_Linux.tar \
-    && 7zz x FreeFileSync_12.2_Install.run \
+    && wget -q https://freefilesync.org/download/FreeFileSync_12.4_Linux.tar.gz \
+    && 7zz x FreeFileSync_12.4_Linux.tar.gz \
+    && 7zz x FreeFileSync_12.4_Linux.tar \
+    && 7zz x FreeFileSync_12.4_Install.run \
     && 7zz x FreeFileSync.tar.gz \
     && mv FreeFileSync.tar /opt/freefilesync \
     && cd /opt/freefilesync \
