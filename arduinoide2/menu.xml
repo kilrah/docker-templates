@@ -3,7 +3,7 @@
     <menu id="root-menu" label="Openbox 3">
         <item label="Arduino IDE 2">
             <action name="Execute">
-                <execute>/opt/arduino/arduino-ide.AppImage --appimage-extract-and-run --no-cleanup --no-sandbox</execute>
+                <execute>/opt/arduino/arduino-ide.AppImage --appimage-extract-and-run --no-sandbox</execute>
             </action>
         </item>
         <item label="File browser">
