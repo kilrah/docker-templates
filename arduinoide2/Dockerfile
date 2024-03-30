@@ -16,7 +16,7 @@ RUN apt-get update -y && \
     apt autoremove -y \
     && mkdir /opt/arduino \
     && cd /opt/arduino \
-    && wget -qO arduino-ide.AppImage https://downloads.arduino.cc/arduino-ide/arduino-ide_2.2.1_Linux_64bit.AppImage \
+    && wget -qO arduino-ide.AppImage https://downloads.arduino.cc/arduino-ide/arduino-ide_2.3.2_Linux_64bit.AppImage \
     && chmod +x arduino-ide.AppImage \
     && useradd -u 99 -g 100 -s /bin/bash --create-home --home-dir /home/arduino arduino \
     && chown -R 99:100 /home/arduino \ 
