@@ -31,11 +31,14 @@ function build_default {
 	docker push kilrah/nextcloud-ffmpeg:fpm
 }
 
-VERSION=29.0.0
+#VERSION=29.0.0
+#build_version
+#VERSION=28.0.4
+#build_version
+VERSION=27.1.8
 build_version
-VERSION=28.0.5
-build_version
-build_default
-VERSION=27.1.9
+VERSION=26.0.13
 build_version
 
+VERSION=28.0.4
+build_default
