@@ -1,24 +1,68 @@
-FROM nextcloud
+ARG VERSION=$VERSION
+ARG BUILDERVERSION=$BUILDERVERSION
 
+FROM nextcloud:$BUILDERVERSION as builder
+
+# Build and install dlib on builder
+RUN apt-get update && \
+    apt-get install -y build-essential wget cmake libx11-dev libopenblas-dev unzip git && \
+    rm -rf /var/lib/apt/lists/*
+
+ARG DLIB_BRANCH=v19.24
+RUN wget -c -q https://github.com/davisking/dlib/archive/$DLIB_BRANCH.tar.gz \
+    && tar xf $DLIB_BRANCH.tar.gz \
+    && mv dlib-* dlib \
+    && cd dlib/dlib \
+    && mkdir build \
+    && cd build \
+    && cmake -DBUILD_SHARED_LIBS=ON .. \
+    && make -j \
+    && make install
+
+# Build and install PDLib on builder
+ARG PDLIB_BRANCH=master
+RUN wget -c -q https://github.com/matiasdelellis/pdlib/archive/$PDLIB_BRANCH.zip \
+    && unzip $PDLIB_BRANCH \
+    && mv pdlib-* pdlib \
+    && cd pdlib \
+    && phpize \
+    && ./configure \
+    && make -j \
+    && make install
+
+# Enable PDlib on builder
+
+# If necesary take the php settings folder uncommenting the next line
+#RUN php -i | grep "Scan this dir for additional .ini files"
+RUN echo "extension=pdlib.so" > /usr/local/etc/php/conf.d/pdlib.ini
+
+# Test PDlib instalation on builer
+RUN git clone https://github.com/matiasdelellis/pdlib-min-test-suite.git \
+    && cd pdlib-min-test-suite \
+    && make -j
+
+#
+# If we pass the tests, we are able to create the final image.
+#
+
+FROM nextcloud:$VERSION
+
+# Install dependencies to image
 RUN sed -i "s/Components: main/Components: main non-free non-free-firmware/" /etc/apt/sources.list.d/debian.sources
 RUN apt-get update \
-    && apt-get install -y ffmpeg intel-media-va-driver-non-free vainfo i965-va-driver 
-RUN apt autoclean -y \
+    && apt-get install -y libopenblas-dev libopenblas0 libopenblas64-0 libbz2-dev \
+    && apt-get install -y ffmpeg intel-media-va-driver-non-free vainfo i965-va-driver \
+    && docker-php-ext-install bz2 \
+    && apt autoclean -y \
     && apt autoremove -y \
-    && rm -rf /var/lib/apt/lists
+    && rm -rf /var/lib/apt/lists/*
 
+# Install dlib and PDlib to image
+COPY --from=builder /usr/local/lib/libdlib.so* /usr/local/lib/
 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+# If is necesary take the php extention folder uncommenting the next line
+#RUN php -i | grep extension_dir
+COPY --from=builder /usr/local/lib/php/extensions/no-debug-non-zts-20220829/pdlib.so /usr/local/lib/php/extensions/no-debug-non-zts-20220829/
+
+# Enable PDlib on final image
+RUN echo "extension=pdlib.so" > /usr/local/etc/php/conf.d/pdlib.ini
