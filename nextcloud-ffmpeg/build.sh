@@ -18,12 +18,12 @@ function build_version {
 }
 
 function build_default {
-	docker build -build-arg VERSION=${VERSION} --build-arg BUILDERVERSION=${BUILDERVERSION} -t kilrah/nextcloud-ffmpeg .
+	docker build --build-arg VERSION=${VERSION} --build-arg BUILDERVERSION=${BUILDERVERSION} -t kilrah/nextcloud-ffmpeg .
 	docker push kilrah/nextcloud-ffmpeg
 
 	VERSION="${VERSION}"-fpm
 
-	docker build -build-arg VERSION=${VERSION} --build-arg BUILDERVERSION=${BUILDERVERSION} -t kilrah/nextcloud-ffmpeg:fpm .
+	docker build --build-arg VERSION=${VERSION} --build-arg BUILDERVERSION=${BUILDERVERSION} -t kilrah/nextcloud-ffmpeg:fpm .
 	docker push kilrah/nextcloud-ffmpeg:fpm
 }
 
