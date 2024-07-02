@@ -1,7 +1,7 @@
 ARG VERSION=$VERSION
 ARG BUILDERVERSION=$BUILDERVERSION
 
-FROM nextcloud:$BUILDERVERSION as builder
+FROM nextcloud:$BUILDERVERSION AS builder
 
 # Build and install dlib on builder
 RUN apt-get update && \
@@ -51,7 +51,7 @@ FROM nextcloud:$VERSION
 RUN sed -i "s/Components: main/Components: main non-free non-free-firmware/" /etc/apt/sources.list.d/debian.sources
 RUN apt-get update \
     && apt-get install -y libopenblas-dev libopenblas0 libopenblas64-0 libbz2-dev \
-    && apt-get install -y ffmpeg intel-media-va-driver-non-free vainfo i965-va-driver \
+    && apt-get install -y ffmpeg intel-media-va-driver-non-free vainfo i965-va-driver mesa-va-drivers \
     && docker-php-ext-install bz2 \
     && apt autoclean -y \
     && apt autoremove -y \
