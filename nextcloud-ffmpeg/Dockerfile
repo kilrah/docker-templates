@@ -52,6 +52,7 @@ RUN sed -i "s/Components: main/Components: main non-free non-free-firmware/" /et
 RUN apt-get update \
     && apt-get install -y libopenblas-dev libopenblas0 libopenblas64-0 libbz2-dev \
     && apt-get install -y ffmpeg intel-media-va-driver-non-free vainfo i965-va-driver mesa-va-drivers \
+    && apt-get install -y nano ncdu \
     && docker-php-ext-install bz2 \
     && apt autoclean -y \
     && apt autoremove -y \
