@@ -4,16 +4,16 @@ RUN go mod init build && \
     go get github.com/geek1011/easy-novnc@v1.1.0 && \
     go build -o /bin/easy-novnc github.com/geek1011/easy-novnc
 
-FROM ubuntu:22.04 as freefilesync-prep
+FROM ubuntu:22.04 AS freefilesync-prep
 
 RUN apt update -y && apt install -y --no-install-recommends wget ca-certificates 7zip
 RUN mkdir /opt/ffs_dl \
     && mkdir /opt/freefilesync \
     && cd /opt/ffs_dl \
-    && wget -q https://freefilesync.org/download/FreeFileSync_13.9_Linux.tar.gz \
-    && 7zz x FreeFileSync_13.9_Linux.tar.gz \
-    && 7zz x FreeFileSync_13.9_Linux.tar \
-    && 7zz x FreeFileSync_13.9_Install.run \
+    && wget -q https://freefilesync.org/download/FreeFileSync_14.0_Linux.tar.gz \
+    && 7zz x FreeFileSync_14.0_Linux.tar.gz \
+    && 7zz x FreeFileSync_14.0_Linux.tar \
+    && 7zz x FreeFileSync_14.0_Install.run \
     && 7zz x FreeFileSync.tar.gz \
     && mv FreeFileSync.tar /opt/freefilesync \
     && cd /opt/freefilesync \
