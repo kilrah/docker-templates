@@ -48,11 +48,13 @@ RUN git clone https://github.com/matiasdelellis/pdlib-min-test-suite.git \
 FROM nextcloud:$VERSION
 
 # Install dependencies to image
-RUN sed -i "s/Components: main/Components: main non-free non-free-firmware/" /etc/apt/sources.list.d/debian.sources
+RUN sed -i "s/Components: main/Components: main non-free non-free-firmware/" /etc/apt/sources.list.d/debian.sources \
+    && echo 'deb http://deb.debian.org/debian bookworm-backports main' >> /etc/apt/sources.list
 RUN apt-get update \
     && apt-get install -y libopenblas-dev libopenblas0 libopenblas64-0 libbz2-dev \
     && apt-get install -y ffmpeg intel-media-va-driver-non-free vainfo i965-va-driver mesa-va-drivers \
     && apt-get install -y nano ncdu \
+    && apt-get install -y libheif-plugins-all/stable-backports \
     && docker-php-ext-install bz2 \
     && apt autoclean -y \
     && apt autoremove -y \
