@@ -10,10 +10,10 @@ RUN apt update -y && apt install -y --no-install-recommends wget ca-certificates
 RUN mkdir /opt/ffs_dl \
     && mkdir /opt/freefilesync \
     && cd /opt/ffs_dl \
-    && wget -q https://freefilesync.org/download/FreeFileSync_14.6_Linux_x86_64.tar.gz \
-    && 7zz x FreeFileSync_14.6_Linux_x86_64.tar.gz \
-    && 7zz x FreeFileSync_14.6_Linux_x86_64.tar \
-    && 7zz x FreeFileSync_14.6_Install.run \
+    && wget -q https://freefilesync.org/download/FreeFileSync_14.8_Linux_x86_64.tar.gz \
+    && 7zz x FreeFileSync_14.8_Linux_x86_64.tar.gz \
+    && 7zz x FreeFileSync_14.8_Linux_x86_64.tar \
+    && 7zz x FreeFileSync_14.8_Install.run \
     && 7zz x FreeFileSync.tar.gz \
     && mv FreeFileSync.tar /opt/freefilesync \
     && cd /opt/freefilesync \
@@ -51,17 +51,3 @@ VOLUME /home/freefilesync/.config/FreeFileSync/
 
 CMD ["bash", "-c", "chown -R 99:100 /dev/stdout && exec gosu freefilesync supervisord"]
 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
