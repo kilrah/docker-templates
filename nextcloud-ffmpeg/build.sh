@@ -21,7 +21,7 @@ function build_version_31 {
 	local MAJOR_VERSION="${VERSION%%.*}"
 
 	docker build --build-arg VERSION=${VERSION} --build-arg BUILDERVERSION=${BUILDERVERSION} --pull -t kilrah/nextcloud-ffmpeg:"${VERSION}" . -f Dockerfile-31
-	docker build --build-arg VERSION=${VERSION} --build-arg BUILDERVERSION=${BUILDERVERSION} --pull -t kilrah/nextcloud-ffmpeg:"${MAJOR_VERSION}" .  -f Dockerfile-31
+	docker image tag kilrah/nextcloud-ffmpeg:"${VERSION}" kilrah/nextcloud-ffmpeg:"${MAJOR_VERSION}"
 	docker push kilrah/nextcloud-ffmpeg:"${VERSION}"
 	docker push kilrah/nextcloud-ffmpeg:"${MAJOR_VERSION}"
 
@@ -29,7 +29,7 @@ function build_version_31 {
 	MAJOR_VERSION="${MAJOR_VERSION}"-fpm
 
 	docker build --build-arg VERSION=${VERSION} --build-arg BUILDERVERSION=${BUILDERVERSION} --pull -t kilrah/nextcloud-ffmpeg:"${VERSION}" .  -f Dockerfile-31
-	docker build --build-arg VERSION=${VERSION} --build-arg BUILDERVERSION=${BUILDERVERSION} --pull -t kilrah/nextcloud-ffmpeg:"${MAJOR_VERSION}" .  -f Dockerfile-31
+	docker image tag kilrah/nextcloud-ffmpeg:"${VERSION}" kilrah/nextcloud-ffmpeg:"${MAJOR_VERSION}"
 	docker push kilrah/nextcloud-ffmpeg:"${VERSION}"
 	docker push kilrah/nextcloud-ffmpeg:"${MAJOR_VERSION}"
 }
@@ -38,7 +38,7 @@ function build_version_33 {
 	local MAJOR_VERSION="${VERSION%%.*}"
 
 	docker build --build-arg VERSION=${VERSION} --build-arg BUILDERVERSION=${BUILDERVERSION} --pull -t kilrah/nextcloud-ffmpeg:"${VERSION}" . -f Dockerfile-33
-	docker build --build-arg VERSION=${VERSION} --build-arg BUILDERVERSION=${BUILDERVERSION} --pull -t kilrah/nextcloud-ffmpeg:"${MAJOR_VERSION}" . -f Dockerfile-33
+	docker image tag kilrah/nextcloud-ffmpeg:"${VERSION}" kilrah/nextcloud-ffmpeg:"${MAJOR_VERSION}"
 	docker push kilrah/nextcloud-ffmpeg:"${VERSION}"
 	docker push kilrah/nextcloud-ffmpeg:"${MAJOR_VERSION}"
 
@@ -46,7 +46,7 @@ function build_version_33 {
 	MAJOR_VERSION="${MAJOR_VERSION}"-fpm
 
 	docker build --build-arg VERSION=${VERSION} --build-arg BUILDERVERSION=${BUILDERVERSION} --pull -t kilrah/nextcloud-ffmpeg:"${VERSION}" . -f Dockerfile-33
-	docker build --build-arg VERSION=${VERSION} --build-arg BUILDERVERSION=${BUILDERVERSION} --pull -t kilrah/nextcloud-ffmpeg:"${MAJOR_VERSION}" . -f Dockerfile-33
+	docker image tag kilrah/nextcloud-ffmpeg:"${VERSION}" kilrah/nextcloud-ffmpeg:"${MAJOR_VERSION}"
 	docker push kilrah/nextcloud-ffmpeg:"${VERSION}"
 	docker push kilrah/nextcloud-ffmpeg:"${MAJOR_VERSION}"
 }
